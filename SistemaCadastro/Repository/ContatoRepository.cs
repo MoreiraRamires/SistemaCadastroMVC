@@ -26,6 +26,25 @@ namespace SistemaCadastro.Repository
             return contato;
         }
 
-        
+        public ContatoModel BuscarPorId(int id)
+        {
+           ContatoModel contato = _bancoContext.Contato.FirstOrDefault(x => x.Id == id);
+            return contato;
+        }
+
+        public ContatoModel Atualizar(ContatoModel contato)
+        {
+            ContatoModel contatoDb = BuscarPorId(contato.Id);
+
+            if (contato.Id == null) throw new System.Exception("Esse contato não existe");
+
+            contatoDb.Nome = contato.Nome;
+            contatoDb.Email = contato.Email;
+            contatoDb.Celular = contato.Celular;
+
+            _bancoContext.Update(contatoDb);
+            _bancoContext.SaveChanges();
+            return contatoDb;
+        }
     }
 }

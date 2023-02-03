@@ -26,7 +26,7 @@ namespace SistemaCadastro.Controllers
 
         public IActionResult Index()
         {
-            List<ContatoModel> contatos = _contatoRepository.BuscarTodos();
+            List<ContatoModel> contatos = _contatoRepository.BuscarTodos();// uso repositorio pq assim eu dependo de abstracao , ao inves de depender diretamente da implementacao ( Dbcontext/ BancoContext)
             return View(contatos);
         }
 
@@ -35,16 +35,16 @@ namespace SistemaCadastro.Controllers
             return View();
         }
 
-        public IActionResult Editar()
+        public IActionResult Editar(int id)
         {
-            return View();
+            ContatoModel contato = _contatoRepository.BuscarPorId(id);
+            return View(contato);
         }
 
-        public IActionResult ApagarConfirmacao()
+        public IActionResult ApagarConfirmacao(int id)
         {
-            ContatoModel person = new ContatoModel();
-            person.Nome = "Rafael";
-            return View(person);
+            ContatoModel contato = _contatoRepository.BuscarPorId(id);
+            return View(contato);
         }
 
 
@@ -58,6 +58,22 @@ namespace SistemaCadastro.Controllers
         public IActionResult Cadastrar(ContatoModel contato)
         {
            _contatoRepository.Adicionar(contato);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Alterar(ContatoModel contato)
+        {
+            _contatoRepository.Atualizar(contato);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpDelete]
+        public IActionResult Apagar(ContatoModel contato)
+        {
+            _contatoRepository.Atualizar(contato);
+
             return RedirectToAction("Index");
         }
     }

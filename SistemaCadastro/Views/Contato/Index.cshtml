@@ -28,9 +28,8 @@
                     <td>@contato.Celular</td>
                     <td>
                         <div class="btn-group">
-                            <a type="button" asp-controller="Contato" asp-action="Editar" class="btn btn-secondary"> Editar</a>
-                            <a type="button" asp-controller="Contato" asp-action="ApagarConfirmacao" class="btn btn-danger"> Apagar</a>
-
+                            <a role="button" type="button" asp-controller="Contato" asp-route-id="@contato.Id"  asp-action="Editar" class="btn btn-secondary"> Editar</a>
+                            <a role="button" type="button" asp-controller="Contato" asp-route-id="@contato.Id" asp-action="ApagarConfirmacao" class="btn btn-danger"> Apagar</a>
 
                         </div>
                     </td>
