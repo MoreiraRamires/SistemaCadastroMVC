@@ -69,10 +69,10 @@ namespace SistemaCadastro.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpDelete]
-        public IActionResult Apagar(ContatoModel contato)
+        public IActionResult Apagar(int id)
         {
-            _contatoRepository.Atualizar(contato);
+
+           _contatoRepository.Deletar(id);
 
             return RedirectToAction("Index");
         }

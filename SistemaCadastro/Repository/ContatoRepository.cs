@@ -46,5 +46,18 @@ namespace SistemaCadastro.Repository
             _bancoContext.SaveChanges();
             return contatoDb;
         }
+
+        public bool Deletar(int id)
+        {
+
+            ContatoModel contatoDb = BuscarPorId(id);
+
+            if (contatoDb == null) throw new System.Exception("Mão foi possível deletar esse contato");
+            _bancoContext.Remove(contatoDb);
+            _bancoContext.SaveChanges();
+
+            return true;
+
+        }
     }
 }
